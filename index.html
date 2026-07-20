@@ -12,14 +12,15 @@
     <meta name="apple-mobile-web-app-title" content="ระบบ SIS">
     
     <!-- เพิ่ม rel="icon" และ shortcut icon -->
-    <link rel="icon" type="image/png" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png">
-    <link rel="shortcut icon" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png">
+    <link rel="icon" type="image/png" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png?v=3">
+    <link rel="shortcut icon" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png?v=3">
     
-    <!-- iOS Safari Icons (บังคับล้างแคชด้วย ?v=2 และเพิ่ม sizes มาตรฐานของ Apple) -->
-    <link rel="apple-touch-icon" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png">
+    <!-- iOS Safari Icons (บังคับล้างแคชด้วย ?v=3) -->
+    <!-- ให้ขนาด 180x180 เป็นตัวหลักสำหรับ iOS -->
+    <link rel="apple-touch-icon" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png?v=3">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png?v=3">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png?v=3">
+    <link rel="apple-touch-icon" sizes="192x192" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png?v=3">
     
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#1cc059">
@@ -184,6 +185,10 @@
                     <button onclick="toggleSidebar()" class="text-gray-500 hover:text-school-600 focus:outline-none md:hidden p-2 -ml-2 rounded-lg">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
+                    
+                    <!-- ส่วนที่เพิ่มมา: โลโก้สำหรับหน้าจอมือถือ (ซ่อนบนหน้าจอใหญ่ด้วย md:hidden) -->
+                    <img src="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png" alt="SIS Logo" class="h-8 w-auto ml-2 md:hidden object-contain">
+                    
                     <h2 id="pageTitle" class="text-xl font-bold text-gray-800 ml-2 md:ml-4">Dashboard</h2>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -979,24 +984,25 @@
     <!-- Application Script Logic -->
     <script>
         // =====================================================================
-        // เพิ่มโค้ดจำลอง API สำหรับ GitHub Pages เพื่อเชื่อมต่อกับ Google Apps Script
+        // แก้ไขส่วนนี้: โค้ดเชื่อมต่อ API แบบแก้ไขเรื่อง CORS แล้ว
         // =====================================================================
         if (typeof google === 'undefined') {
             window.google = {
                 script: {
                     run: (function() {
-                        // ⚠️ ลบ URL เดิมทิ้ง และนำลิงก์ Web App จาก Google Apps Script (ตอน Deploy ใหม่) มาวางที่นี่
+                        // ⚠️ ลบ URL เดิมทิ้ง และนำลิงก์ Web App (ที่ลงท้ายด้วย /exec) มาวางที่นี่
                         const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxqVxZSG8Z0QcVH1t_xRTaAHer0AxxPmgmRLqekVd6LaUWxRZhBza42q8mCUIvdASky/exec';
                         
                         function callAPI(action, payload, successHandler, failureHandler) {
                             payload.action = action;
                             fetch(WEB_APP_URL, {
-                                redirect: "follow",
                                 method: 'POST',
+                                // 💡 เปลี่ยนเป็น text/plain ป้องกัน Preflight Request ของ CORS
                                 headers: {
-                                    'Content-Type': 'text/plain;charset=utf-8',
+                                    'Content-Type': 'text/plain;charset=utf-8', 
                                 },
-                                body: JSON.stringify(payload)
+                                body: JSON.stringify(payload),
+                                redirect: "follow" // 💡 จำเป็นสำหรับ Google Apps Script
                             })
                             .then(response => response.json())
                             .then(data => {
@@ -3496,8 +3502,13 @@
             "theme_color": "#1cc059",
             "icons": [
                 {
-                    "src": "https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png",
+                    "src": "https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png?v=3",
                     "sizes": "512x512",
+                    "type": "image/png"
+                },
+                {
+                    "src": "https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png?v=3",
+                    "sizes": "192x192",
                     "type": "image/png"
                 }
             ]
