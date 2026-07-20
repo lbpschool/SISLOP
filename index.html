@@ -5,22 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>School Information System</title>
     <!-- ========================================== -->
-    <!-- PWA Meta Tags สำหรับทำแอปหน้าจอมือถือ -->
+    <!-- PWA Meta Tags สำหรับทำแอปหน้าจอมือถือ (อัปเดตใหม่) -->
     <!-- ========================================== -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ระบบ SIS">
     
-    <!-- เพิ่ม rel="icon" และ shortcut icon -->
-    <link rel="icon" type="image/png" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png?v=3">
-    <link rel="shortcut icon" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png?v=3">
+    <!-- Favicon มาตรฐาน -->
+    <link rel="icon" type="image/png" sizes="192x192" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png">
+    <link rel="shortcut icon" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png">
     
-    <!-- iOS Safari Icons (บังคับล้างแคชด้วย ?v=3) -->
-    <!-- ให้ขนาด 180x180 เป็นตัวหลักสำหรับ iOS -->
-    <link rel="apple-touch-icon" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png?v=3">
-    <link rel="apple-touch-icon" sizes="152x152" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png?v=3">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png?v=3">
-    <link rel="apple-touch-icon" sizes="192x192" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png?v=3">
+    <!-- iOS Safari Icons (ครอบคลุมขนาดหน้าจอ iPhone/iPad หลายรุ่น) -->
+    <link rel="apple-touch-icon" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png">
     
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#1cc059">
@@ -3493,23 +3494,29 @@
             document.body.removeChild(textArea);
         }
 
+        // ==========================================
+        // การสร้าง Manifest แบบ Dynamic สำหรับ PWA
+        // ==========================================
         const appManifest = {
             "name": "ระบบข้อมูลนักเรียน",
             "short_name": "ระบบ SIS",
-            "start_url": "https://script.google.com/macros/s/AKfycbwp9j3qv2HrsqjCc--Vhv7pzLeR3IV2Su97hL9lMNms_kG1j6YXwLjG9ylB1KiDDif2/exec",
+            // ดึง URL ปัจจุบันมาใช้เป็น start_url อัตโนมัติ เพื่อลดปัญหาการส่งพารามิเตอร์ผิดพลาดตอนติดตั้งแอป
+            "start_url": window.location.href.split('?')[0], 
             "display": "standalone",
             "background_color": "#f3f4f6",
             "theme_color": "#1cc059",
             "icons": [
                 {
-                    "src": "https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png?v=3",
-                    "sizes": "512x512",
-                    "type": "image/png"
+                    "src": "https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png",
+                    "sizes": "192x192",
+                    "type": "image/png",
+                    "purpose": "any maskable"
                 },
                 {
-                    "src": "https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png?v=3",
-                    "sizes": "192x192",
-                    "type": "image/png"
+                    "src": "https://img2.pic.in.th/41bd06dad4249889e21c83543f7e0154.png",
+                    "sizes": "512x512",
+                    "type": "image/png",
+                    "purpose": "any maskable"
                 }
             ]
         };
